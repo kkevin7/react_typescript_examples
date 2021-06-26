@@ -1,3 +1,4 @@
+import { Funciones } from "./typescript/Funciones";
 import { ObjectosTilerales } from "./typescript/ObjectosTilerales";
 import { TipoBasicos } from "./typescript/TipoBasicos";
 
@@ -7,7 +8,8 @@ const App = () => {
       <h1>Introduccion a TS</h1>
       <hr/>
       {/* <TipoBasicos/> */}
-      <ObjectosTilerales/>
+      {/* <ObjectosTilerales/> */}
+      <Funciones/>
     </div>
   )
 }
