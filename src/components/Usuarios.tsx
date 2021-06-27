@@ -1,22 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { reqResApi } from '../api/reqRest';
-import { ReqResListado, Usuario } from '../interfaces/reqRes';
+import { useUsuarios } from '../hooks/useUsuarios';
+import { Usuario } from '../interfaces/reqRes';
 
 export const Usuarios = () => {
-    const [usuarios, setUsuarios] = useState<Usuario[]>([])
-
-    useEffect(() => {
-        getUsuarios();
-    }, []);
-
-
-    const getUsuarios = async () => {
-        await reqResApi.get<ReqResListado>('/users')
-            .then(resp => {
-                setUsuarios(resp.data.data);
-            })
-            .catch(console.log);
-    }
+    const {usuarios, getUsuarios} = useUsuarios()
 
     const renderUsuario = (usuario: Usuario) => {
         const { id, first_name, last_name, avatar, email } = usuario;
@@ -44,6 +30,7 @@ export const Usuarios = () => {
                     {usuarios.map(usuario => renderUsuario(usuario))}
                 </tbody>
             </table>
+            <button type="button" className="btn btn-primary" onClick={getUsuarios}>Siguientes</button>
         </>
     )
 }
