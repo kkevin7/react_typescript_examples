@@ -16,18 +16,29 @@ export const useUsuarios = () => {
                 page: paginaRef.current
             }
         });
-
-        if(resp.data.data){
+        if (resp.data.data.length > 0) {
             setUsuarios(resp.data.data);
-            paginaRef.current ++;
-        }else{
+        } else {
+            paginaRef.current--;
             alert('No hay registros');
         }
-        setUsuarios(resp.data.data);
     }
 
-    return{
+    const paginaSiguiente = () => {
+        paginaRef.current++;
+        getUsuarios();
+    }
+
+    const paginaAnterior = () => {
+        if (paginaRef.current > 1) {
+            paginaRef.current--;
+            getUsuarios();
+        }
+    }
+
+    return {
         usuarios,
-        getUsuarios,
+        paginaAnterior,
+        paginaSiguiente,
     }
 }
